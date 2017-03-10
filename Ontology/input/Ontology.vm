@@ -1,0 +1,45 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.cyberobject.com/co-nlp/$version/$doc#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix domain: <http://www.cyberobject.com/co-nlp/ontology/domain#> .
+@prefix var: <http://www.cyberobject.com/co-nlp/ontology/var#>  .
+@prefix lemma: <http://www.cyberobject.com/co-nlp/ontology/lemma#>  .
+@base <http://www.cyberobject.com/co-nlp/$version/$doc> .
+
+<http://www.cyberobject.com/co-nlp/$version/$doc> rdf:type owl:Ontology .
+
+<http://www.cyberobject.com/co-nlp/$version/$doc#> domain:belongTo domain:default .
+
+#    Annotation properties
+
+
+#    Datatypes
+
+
+$datatypes
+
+#    Object Properties
+:dobj rdf:type owl:ObjectProperty .
+:nsubj rdf:type owl:ObjectProperty .
+:iobj rdf:type owl:ObjectProperty .
+
+$objectprops
+
+#    Data properties
+
+$dataprops
+
+#    Classes
+:__SOLUTION rdf:type owl:Class .
+
+$classes
+
+#    Individuals
+
+$individuals
+
+
+

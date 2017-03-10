@@ -1,0 +1,6 @@
+*.log
+bin
+logs/*
+.project
+.classpath
+"logs\\co-nlq.txt"

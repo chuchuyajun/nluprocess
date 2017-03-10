@@ -1,0 +1,98 @@
+
+
+;;;;;;;;;;;;;;TD Ontology Rules ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+
+(defrule td_gov_owl
+	(_td ? ?gov ?)
+	(_pos ?gov NNP|NNS|NN|JJ|CD)
+	(not (_fact ?gov rdf:type owl:NamedIndividual))
+=>
+	(assert (_fact ?gov rdf:type owl:NamedIndividual))
+)
+
+(defrule td_dep_owl
+	(_td ? ? ?dep)
+	(_pos ?dep NNP|NNS|NN|JJ|CD)
+	(not (_fact ?dep rdf:type owl:NamedIndividual))
+=>
+	(assert (_fact ?dep rdf:type owl:NamedIndividual))
+)  
+	
+(defrule td_ner_property
+	(ner ?word ?attr)
+	(not (_fact ?attr rdf:type owl:Class))
+=>
+	(assert (_fact ?attr rdf:type owl:Class))
+	(assert (_fact (str-merge has ?attr) rdf:type ObjectProperty))
+)
+
+(defrule td_ner_attr
+	(_fact ?attr rdf:type owl:Class)
+	(ner ?word ?attr)
+=>
+	(assert (_fact ?word rdf:type ?attr))
+)
+
+;;;;;;;;;;;;;;Domain Ontology Rules ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;John/NN is 30/CD-NUMBER	
+;Apple is red/JJ-COLOR
+(defrule nsubj-cop-ner-adj
+	(_pos ?adj JJ|CD)	
+	(_td nsubj ?adj ?subj)
+	(_td cop ?adj ?)
+	(_fact ?adj rdf:type ?attr)
+	(_fact ?attr rdf:type owl:Class)
+=>
+	(assert (_fact ?subj (str-merge has ?attr) ?adj))
+)
+
+;Mary/NN is happy/JJ
+(defrule nsubj-cop-no-ner-adj
+	(_td nsubj ?adj ?subj)
+	(_pos ?adj JJ)	
+	(_td cop ?adj ?)
+	(not (ner ?adj ?))
+=>
+	(assert (_fact (str-merge hasAttribute) rdf:type ObjectProperty))  ; to avoid duplicate, need add exists condition here
+	(assert (_fact ?subj hasAttribute ?adj))
+)
+
+;John/NN is a teacher/NN
+(defrule nsubj-cop-nn
+	(_td nsubj ?noun ?subj)
+	(_pos ?noun NNP|NNS|NN)	
+	(_td cop ?noun ?)
+=>
+	;(if (not (exists (_fact belongs rdf:type ObjectProperty))) then
+	;	(assert (_fact belongs rdf:type ObjectProperty)))
+	(assert (_fact belongs rdf:type ObjectProperty))  ; to avoid duplicate, need add exists condition here
+	(assert (_fact ?subj belongs ?noun))
+)
+
+;good/JJ teacher/NN
+(defrule amod-jj-nn
+	(_td amod ?noun ?adj)
+	(_pos ?noun NNP|NNS|NN)
+	(_pos ?adj JJ)
+=>
+	(assert (_fact (str-merge hasAttribute) rdf:type ObjectProperty))  ; to avoid duplicate, need add exists condition here
+	(assert (_fact ?noun hasAttribute ?adj))
+)
+
+;John owns a computer
+(defrule nsubj-dobj
+	(_td nsubj ?vb ?subj)
+	(_td dobj ?vb ?dobj)
+=>
+	(assert (_fact ?vb rdf:type ObjectProperty))  
+	(assert (_fact ?subj ?vb ?dobj))
+)
+
+
+;;;;;;;;;;;;;;;;;;;;;;Questions;;;;;;;;;;;;;;;;;;
+
+; where is Newyork?
+
+
+  

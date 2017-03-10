@@ -1,0 +1,94 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.cyberobject.com/co-nlp/QATest/Ontology8119093689b4e0c8840af5ed76dc1c31.owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix domain: <http://www.cyberobject.com/co-nlp/ontology/domain#> .
+@prefix var: <http://www.cyberobject.com/co-nlp/ontology/var#>  .
+@prefix lemma: <http://www.cyberobject.com/co-nlp/ontology/lemma#>  .
+@base <http://www.cyberobject.com/co-nlp/QATest/Ontology8119093689b4e0c8840af5ed76dc1c31.owl> .
+
+<http://www.cyberobject.com/co-nlp/QATest/Ontology8119093689b4e0c8840af5ed76dc1c31.owl> rdf:type owl:Ontology .
+
+<http://www.cyberobject.com/co-nlp/QATest/Ontology8119093689b4e0c8840af5ed76dc1c31.owl#> domain:belongTo domain:default .
+
+#    Annotation properties
+
+
+#    Datatypes
+
+
+#TBD
+
+#    Object Properties
+:dobj rdf:type owl:ObjectProperty .
+:nsubj rdf:type owl:ObjectProperty .
+:iobj rdf:type owl:ObjectProperty .
+
+:hasDATE rdf:type owl:ObjectProperty .
+:hasPERSON rdf:type owl:ObjectProperty .
+:isMODAL rdf:type owl:ObjectProperty .
+
+
+#    Data properties
+
+:comparedDegree rdf:type owl:DatatypeProperty .
+:has-VALUE rdf:type owl:DatatypeProperty .
+
+
+#    Classes
+:__SOLUTION rdf:type owl:Class .
+
+:DATE rdf:type owl:Class .
+:PERSON rdf:type owl:Class .
+
+
+#    Individuals
+
+:tomorrow_1x8 :has-VALUE "tomorrow" .
+:tomorrow_1x8 lemma:value lemma:tomorrow .
+:tomorrow_1x8 rdf:type owl:NamedIndividual .
+:tomorrow_1x8 rdf:type :DATE .
+:tomorrow_1x8 rdfs:label "1" .
+
+
+:John_will_have_vacation_the_day_after_tomorrow rdf:type :__SOLUTION .
+:John_will_have_vacation_the_day_after_tomorrow rdf:type owl:NamedIndividual .
+:John_will_have_vacation_the_day_after_tomorrow rdfs:label "1" .
+:John_will_have_vacation_the_day_after_tomorrow rdfs:comment "John will have vacation the day after tomorrow . " .
+
+
+:have_1x3 :dobj :vacation_1x4 .
+:have_1x3 lemma:value lemma:have .
+:have_1x3 rdf:type owl:NamedIndividual .
+:have_1x3 :isMODAL :will_1x2 .
+:have_1x3 rdfs:label "1" .
+
+
+:day_1x6 lemma:value lemma:day .
+:day_1x6 rdf:type owl:NamedIndividual .
+:day_1x6 rdf:type :DATE .
+:day_1x6 rdfs:label "1" .
+
+
+:vacation_1x4 :hasDATE :tomorrow_1x8 .
+:vacation_1x4 lemma:value lemma:vacation .
+:vacation_1x4 rdf:type owl:NamedIndividual .
+:vacation_1x4 rdfs:label "1" .
+
+
+:will_1x2 lemma:value lemma:will .
+:will_1x2 rdf:type owl:NamedIndividual .
+:will_1x2 rdfs:label "1" .
+
+
+:john_1x1 :nsubj :have_1x3 .
+:john_1x1 lemma:value lemma:john .
+:john_1x1 rdf:type owl:NamedIndividual .
+:john_1x1 rdf:type :PERSON .
+:john_1x1 rdfs:label "1" .
+
+
+
+
